@@ -1,0 +1,504 @@
+---
+title: "Term Project"
+author: "Apoorva Dharmendrakumar Patel (0780923)"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+header-includes:
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+  - \usepackage[margin=1in]{geometry}
+---
+\fontsize{12}{12}
+
+\selectfont
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\newpage
+
+# Introduction: 
+
+Financial institutions, governments, and people all have serious concerns about fraudulent actions in financial payment networks. The development of complex fraud schemes that are challenging to detect and stop has been made possible by the advancement of electronic payment mechanisms. To identify fraudulent transactions, data analytics techniques have been applied, and inferential statistical techniques including the t-test, chi-square test, and ANOVA have been utilized in various research. The detection of fraudulent tendencies in transaction data has also been extensively done using machine learning techniques. With increase in online transactions day by day the demand to spot fraud in financial transactions as it happens has grown significantly in relevance during the past few years. Real-time data, such transaction time stamps, location information, and device details, can be utilized to spot suspicious activity in real-time and prompt prompt responses, like transaction blocking or alert alerts. Stream processing, complex event processing, and online learning are three techniques that can be utilized to enable real-time fraud detection capabilities. Real-time data processing methods like stream processing, complex event processing, and online learning can be utilized to enhance real-time fraud detection capabilities.
+
+The effectiveness of machine learning algorithms in identifying fraudulent transactions has been examined in several studies. In order to compare the efficiency of Bayesian networks, decision trees, and neural networks in detecting credit card fraud, **Rb et al. (2021)**. Decision trees performed better than the other strategies, they discovered. In a comparison study of various machine learning techniques for finding fraud in credit card transactions, **Bhattacharyya et al. (2011)** found that decision trees, random forests, and support vector machines were good at spotting fraud. Artificial neural networks, decision trees, and logistic regression were found to be the most often utilised algorithms in a thorough literature analysis of machine learning approaches used in financial fraud detection by **Afriyie et al. (2023)**.
+
+To further support the findings in the literature, additional studies have also reported the effectiveness of machine learning techniques in detecting fraudulent transactions. **Kultur et al. (2017)**, for instance, created a hybrid model for detecting credit card fraud, integrating decision trees and Bayesian networks, attaining excellent accuracy in identifying fraudulent transactions. A machine learning ensemble strategy that combines random forests and gradient boosting was found to be successful in identifying fraud in online payment transactions in a study by **Wang et al. (2018)**. Moreover, **Hajek et al. (2022)** achieved great accuracy in identifying fraudulent transactions by using a deep learning-based approach for fraud detection in mobile payment systems, specifically convolutional neural networks.
+
+Inferential statistical techniques have also been employed in fraud detection in addition to machine learning techniques. For instance, **Wu and Wu (2014)** used the chi-square and t-test to look for irregularities in credit card transactions. They discovered that these techniques worked well in spotting fraudulent transactions. Chi-square test and ANOVA were employed by **Jan et al. (2018)** to spot suspicious activity in user accounts and found that these techniques were efficient at spotting fraud.
+
+Big data analytics approaches have attracted increasing attention in recent years as a means of detecting fraud in financial payment systems. A big data analytics methodology for identifying credit card fraud, for instance, was suggested by **Cherif et al. (2022)** and coupled machine learning methods with data pre-processing and feature engineering on a vast volume of transaction data. They discovered that the accuracy of fraud detection has greatly increased thanks to the application of big data analytics. Similar to this, **Huang et al. (2018)** used big data analytics approaches, namely distributed machine learning algorithms, for fraud detection in mobile payment systems and were successful in identifying fraudulent transactions with high accuracy.
+
+As it enables prompt detection and mitigation of fraudulent activity, the use of real-time data and streaming analytics has attracted attention in the field of fraud detection. Real-time processing of data, including transactional and user behavior data, is possible to quickly identify and stop fraudulent activity. Real-time fraud detection and prevention can be made possible by streaming analytics approaches like online machine learning algorithms and event-based processing, which is crucial in dynamic and hectic financial transaction environments.
+
+The accuracy of fraud detection models can be improved by incorporating subject expertise and professional perspectives. To capture the distinctive properties of financial transactions and enhance model performance, domain-specific features, rules, and heuristics can be added into the modelling process. For instance, domain-specific data including transaction history, seller reputation, and buyer behavior were used to increase the accuracy of fraud detection in a study by **Pourhabibi et al. (2020)** on fraud identification in online auctions. Moreover, expert opinions can validate findings, aid in the interpretation of model results, and offer recommendations tailored to the setting.
+
+It is essential to assess the effectiveness of fraud detection models using the right metrics. The efficacy and efficiency of fraud detection models can be evaluated using metrics like accuracy, precision, recall, F1-score, and receiver operating characteristic (ROC) curve. It is essential to select the appropriate evaluation metrics based on the characteristics of the data and the particular requirements of the fraud detection task. Analyses of different models can help determine which model is best for a given situation by checking how they interact with one another.
+
+Explainable AI (XAI) has recently become more significant in fraud detection to increase accountability and transparency. For the judgement made by fraud detection models, XAI techniques including rule-based systems, decision trees, and LIME (Local Interpretable Model-agnostic Explanations) can offer interpretable justifications. This can improve trust and confidence in the model's predictions by helping to understand the factors that led to the detection of transactions as fraudulent. Techniques for XAI can also support regulatory compliance and effective stakeholder communication. Apart from this, with increase in social networking sites, Social network analysis (SNA) has emerged as a promising approach in fraud detection to identify patterns of fraud by analyzing relationships and interactions among entities. SNA techniques, such as centrality measures, community detection, and link prediction, can be applied to financial transaction data to uncover hidden relationships between entities, such as fraudsters, victims, and accomplices. The social structure of fraud networks can be helpfully revealed by SNA, and it can also assist us in spotting suspicious patterns of activity that may not be readily apparent in individual transaction data.
+
+The dataset **(Synthetic Data From a Financial Payment System, 2017)** which will be used in this study contains information on transactions transactions made over a period of six months, with each transaction assigned a unique identifier. The dataset contains 180 steps, representing each day of the six months under consideration. However, the step variable has been removed from the dataset. The customer variable represents the unique ID of the person who initiated the transaction. There are a total of 4,109 unique customers in the dataset. The age variable is split into seven categories, ranging from less than 18 years old to over 65 years old, with the letter U standing for unknown. The gender variable has four categories: F for Female, M for Male, E for Enterprise, and U for Unknown. The merchant variable represents the unique ID of the party that received the transaction. There are a total of 50 unique merchants in the dataset. The category variable represents the general type of transaction, and there are 15 unique categories. These categories include transportation, food, health, wellness and beauty, fashion, bars and restaurant, hyper, sports and toys, tech, home, hotel services, other services, contents, travel, and leisure. The amount variable represents the value of the transaction, with only 52 values equal to zero and no negative values. Finally, the fraud variable is a binary flag column that is coded with 0 if the transaction was clean and 1 if the transaction was fraudulent. Overall, the dataset contains information on 4,109 unique customers, 50 unique merchants, 15 transaction categories, and a binary variable that indicates whether each transaction was fraudulent or not. The data is organized in a tabular format, with each row representing a unique transaction and each column representing a variable associated with that transaction.
+
+The chi-square test and t-test are examples of inferential statistical techniques that have been effective in detecting fraudulent behavior in financial payment systems. In order to identify fraudulent trends in transaction data, machine learning approaches like as artificial neural networks, decision trees, and support vector machines have been successful. More research is needed on deep learning algorithms for anomaly detection. As a result, it is clear from the discussion and references above that data analytics techniques are essential for recognizing payment fraud, and more study on systems for detecting payment fraud would be helpful in elucidating this issue. This will help us identify which type of transaction is the main target of the most scams.
+
+
+```{r, echo=FALSE, results=FALSE, warning=FALSE, message=FALSE}
+# Required libraries for analysis
+library(ggplot2) 
+library(tidyverse)
+library(gridExtra) 
+library(scales) 
+library(ggrepel)
+library(scales)
+library(kableExtra)
+library(knitr)
+library(dplyr)
+library(caret)
+library(rpart)
+library(chisq.posthoc.test)
+library(effectsize)
+library(magrittr)
+
+```
+
+
+
+```{r, echo=FALSE, results=FALSE, warning=FALSE, message=FALSE}
+data <- read.csv("C:\\Trent\\Data Analytics with R\\Assignment\\bs140513_032310.csv")
+data
+```
+
+# Method: 
+
+In any analysis, data pre-processing steps hold a big importance, because its helps us to prepare the data for further analysis from which we can draw precise conclusions which are error free. Hence, before we do or start our analysis, we'll first of all do some pre-processing of the data. 
+
+```{r, results=FALSE, warning=FALSE, message=FALSE}
+# Data processing
+
+# Preprocessing steps
+data <- data %>% 
+
+# remove columns with 1 constant value
+dplyr::select(-zipcodeOri, -zipMerchant) %>% 
+  
+# remove comas
+mutate(customer = gsub("^.|.$", "", customer),
+         age = gsub("^.|.$", "", age),
+         gender = gsub("^.|.$", "", gender),
+         merchant = gsub("^.|.$", "", merchant),
+         category = gsub("^.|.$", "", category)) %>% 
+  
+# remove es_ from "category"
+mutate(category = sub("es_", "", category)) %>% 
+  
+# remove Unknown from Gender
+filter(gender != "U")
+
+# Replace U in Age with "7"
+data$age[which(data$age == "U")]<-"7"
+
+# Create Amount Thresholds
+data <- data %>% 
+  mutate(amount_thresh = ifelse(amount<= 500, "0-500",
+                         ifelse(amount<= 1000, "500-1000",
+                         ifelse(amount<= 1500, "1000-1500",
+                         ifelse(amount<= 2000, "1500-2000",
+                         ifelse(amount<= 2500, "2000-2500",
+                         ifelse(amount<= 3000, "2500-3000", ">3000")))))))
+
+
+# Select only the first 5000 rows
+data <- data[1:10000, ]
+
+# Check data
+data %>% head()
+```
+
+The above provided code performs data processing and pre-processing on a data object called "data". It starts by removing columns (zipcodeOri and zipMerchant) with a constant value, followed by removing commas from selected columns, removing "es_" from the "category" column, and filtering out rows with "Unknown" gender. It then replaces "U" values in the "age" column with "7" and creates a new column called "amount_thresh" to categorize the values in the "amount" column into different ranges. Next, we select and take only the first 5000 rows from the processed data and finally displays the first few rows of the resulting data for visual inspection. Overall, the code performs various data manipulation operations to preprocess and transform the "data" object, resulting in a subset of data that is ready for further analysis or modeling.
+
+After our data pre-processing now lets see what our data set contains. Overall, the dataset contains information on 4,109 unique customers, 50 unique merchants, 15 transaction categories, and a binary variable that indicates whether each transaction was fraudulent or not. The data is organized in a tabular format, with each row representing a unique transaction and each column representing a variable associated with that transaction.
+
+Now, With the help of a chi-square test of independence, we hope to identify which category is most likely to commit fraud. The Chi-square test of independence is a statistical hypothesis test used to examine whether or not the nominal or categorical variables are likely to be connected.
+
+Now, lets take our assumptions for the test, which are mentioned as below.
+
+**Null hypothesis:** There is no association between the category of the transaction and whether it is fraudulent or clean.
+
+**Alternative hypothesis:** There is an association between the category of the transaction and whether it is fraudulent or clean.
+
+But, before we run the chi square test we will check about few conditions which are required to preform the test.
+
+**Independence:** Since, our dataset contains samples which were randomly selected this condition is met.
+
+**Success/Failure:** Since we have atleast 5 or more samples in each category, so this condition is also met.
+
+
+```{r, results=FALSE, warning=FALSE}
+# Contingency table
+cont_table <- table(data$category, data$fraud)
+
+# Perform chi-square test of independence
+chi_test <- chisq.test(cont_table)
+
+# View test results
+chi_test
+
+# View expected counts
+chi_test$expected
+```
+
+```{r, results=FALSE}
+# Effect Size using Cramer's v
+cramers_v(cont_table)
+```
+
+Now, lets check which category contains the most frauds by analyzing the below plots.
+
+- Plot 1 (Transactional frequency per category)
+
+```{r, eval=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+ 
+data %>% 
+  
+# Filter the data and exclude the transportation category from the plot
+  filter(category != "transportation") %>% 
+  # group data by category
+  group_by(category) %>% 
+  summarise(n = n()) %>% 
+
+# Create the plot
+  ggplot(aes(x = reorder(as.factor(category), n), y = n)) +
+  geom_bar(stat = "identity", aes(fill = n)) +
+  coord_flip() +
+  
+  geom_label(aes(label = formatC(n, format="f", big.mark=",", digits=0)), 
+             size = 3.2) +
+  scale_fill_gradient(low = colors60s[5], high = colors60s[3],
+                      guide = "none") +
+  theme(axis.text.x = element_blank()) +
+  
+# Set the axis and title labels
+labs(x = "Category", y = "Frequency", title = "Category Transaction Frequency", 
+       subtitle = "transportation has a little bit above 500,000 transactions")
+```
+
+- Plot 2 (Fraud cases by category)
+
+```{r, eval=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+     
+# filter the data to only include fraud cases, group by category
+data %>% 
+filter(fraud == 1) %>% 
+# group data by category and fraud cases
+group_by(category, fraud) %>% 
+summarise(n = n()) %>% 
+  
+# A barplot with reordered categories by frequency and fill by frequency
+ggplot(aes(x = reorder(as.factor(category), n), y = n)) +
+geom_bar(stat = "identity", aes(fill = n)) +
+coord_flip() +
+  geom_label(aes(label = formatC(n, format="f", big.mark=",", digits=0)), 
+             size = 3.2) +
+  scale_fill_gradient(low = colors60s[5], high = colors60s[1], 
+                      guide = "none") +
+  theme(axis.text.x = element_blank()) +
+  
+# Set the axis and title labels
+  labs(x = "Category", y = "Frequency", 
+       title = "Fraud Cases in Category Transaction")
+```
+
+- Plot 3 (Fraudulent transactions per individual category)
+
+```{r, eval=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+    
+# Pipe the data through a series of operations
+data %>% 
+
+# Convert the category variable to a factor with specified levels
+  mutate(category = factor(category, levels = c("contents", "food", 
+  "transportation", "fashion", "barsandrestaurants","hyper", 
+  "wellnessandbeauty", "tech", "health", "home", "otherservices", 
+  "hotelservices", "sportsandtoys", "travel", "leisure"))) %>% 
+
+# Create the plot object
+ggplot(aes(x = category, fill = as.factor(fraud))) +
+geom_bar(stat = "count", position = "fill") +
+scale_y_continuous(labels = scales::percent) +coord_flip() +
+scale_fill_manual(values = colors60s[c(4, 6)]) +
+  
+# Set the axis and title labels
+labs(x = "Category", y = "Percentage", 
+     title = "Fraud Percentage for Categories", fill = "Fraud")
+```
+
+- Decesion Tree Model
+
+Now, lets build our decision tree model to further predict if any specific category is responsible for transactional frauds.
+
+```{r, eval=FALSE}
+# Loading required libraries
+library(rpart)
+library(rpart.plot)
+
+# Train-Test Split (80:20 ratio)
+train_indices <- sample(1:nrow(data), nrow(data)*0.8) 
+train_data <- data[train_indices, ]
+test_data <- data[-train_indices, ]
+
+# Decision Tree model
+model <- rpart(fraud ~ category, data=train_data, method="class")
+
+# Make predictions on test data
+predictions <- predict(model, test_data, type="class")
+
+# Evaluate model performance
+confusion_matrix <- table(predictions, test_data$fraud)
+confusion_matrix
+accuracy <- sum(diag(confusion_matrix))/sum(confusion_matrix)
+precision <- confusion_matrix[2,2] / (confusion_matrix[2,2] 
+                                      + confusion_matrix[1,2])
+recall <- confusion_matrix[2,2] / (confusion_matrix[2,2] 
+                                   + confusion_matrix[2,1])
+
+# Print model performance metrics
+cat("Accuracy:", round(accuracy, 3), "\n")
+cat("Precision:", round(precision, 3), "\n")
+cat("Recall:", round(recall, 3), "\n")
+
+```
+
+The above test aimed to determine the category that has the most fraud cases. The Chi-square test of independence was used to find out whether the categories of transactions are associated with fraudulent or clean transactions. The assumptions for the test include a null hypothesis stating that there is no association between the category of the transaction and whether it is fraudulent or clean, and an alternative hypothesis stating that there is an association between the two. Before running the test, the conditions required to perform the test are checked, which include independence and success/failure.
+
+The contingency table was created to count the fraudulent and clean transactions for each category. The Chi-square test of independence was then performed, and the expected counts are viewed as a part of the test conditions. Cramer's V was then used to calculate the effect size.
+
+Three different bar plots are created using ggplot to show the transaction frequency and percentage of fraud cases for each category. The plot highlights about the "sportsandtoys" and "health" categories fraud cases. The code also reorders the categories by frequency and fills them by frequency. The predefined theme for the plot was stetted, and the plot's size is adjusted. Then, the axis and title labels were set. Plot 1 groups the data together by group by methods to check the categories with maximum number of transactions, plot 2 groups the data by categories having the fraudulent an non-fraudulent transactions. While plot 3 summarizes about the fraudulent transactional with respect to each categories.
+
+Finally we created the decision tree model for our further analysis to predict the frauds in various category. A decision tree is a tree-like structure where each node represents a decision point based on a specific feature or attribute. The branches represent different possible outcomes or decisions, and the leaves represent the final decision or prediction. The decision tree algorithm automatically generates this structure by recursively splitting the data based on the best attribute that maximizes information gain or Gini impurity, depending on the chosen algorithm. A confusion matrix was also created to evaluate the model performance. But, before fitting of the model, necessary libraries were first loaded followed by dividing of the dataset into the training and testing datasets (80:20) train-test split method. In the model "category" column was used as predictor and "fraud" column was used as the target variable. Post this we predicted values for our model and also printed the precision, recall and accuracy values for the model.
+
+In conclusion, the use of Chi-square test of independence was done to determine the association between transaction categories and fraud, bar plots were created to visualize transaction frequency and fraud percentage, and the development of a decision tree model with a confusion matrix was done for the performance evaluation of model. Necessary libraries were loaded and datasets were divided for training and testing. Precision, recall, and accuracy values were printed for the model to check its accuracy and prediction power.
+
+# Result:
+
+Now, lets run and view the results for the above code chunks to understand the results which can help us to draw our conclusions.
+
+```{r, echo=FALSE, warning=FALSE}
+# Create a contingency table with counts of fraudulent and clean transactions for each category
+cont_table <- table(data$category, data$fraud)
+
+# Perform chi-square test of independence
+chi_test <- chisq.test(cont_table)
+
+# View test results
+chi_test
+
+# View expected counts
+chi_test$expected
+```
+
+Since $p$-value < .05, we will reject the Null hypothesis.
+
+```{r, echo=FALSE}
+# Effect Size using cramer's v
+cramers_v(cont_table)
+```
+
+Based on Cohen's (1988) conventions we can say that our effect is large.
+
+- Plot 1
+
+```{r, echo=FALSE, message=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+ 
+data %>% 
+  
+# Filter the data and exclude the transportation category from the plot
+  filter(category != "transportation") %>% 
+  # group data by category
+  group_by(category) %>% 
+  summarise(n = n()) %>% 
+
+# Create the plot
+  ggplot(aes(x = reorder(as.factor(category), n), y = n)) +
+  geom_bar(stat = "identity", aes(fill = n)) +
+  coord_flip() +
+  
+  geom_label(aes(label = formatC(n, format="f", big.mark=",", digits=0)), size = 3.2) +
+  scale_fill_gradient(low = colors60s[5], high = colors60s[3], guide = "none") +
+  theme(axis.text.x = element_blank()) +
+  
+# Set the axis and title labels
+  labs(x = "Category", y = "Frequency", title = "Category Transaction Frequency", subtitle = "transportation has a little bit above 500,000 transactions")
+```
+
+From the above plot result we can say that the "wellnessandbeauty" and "transportation" category has the highest number of transaction frequency followed by "food" and "health category".
+
+- Plot 2
+
+```{r, echo=FALSE, message=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+     
+# filter the data to only include fraud cases, group by category, and count the number of transactions
+data %>% 
+filter(fraud == 1) %>% 
+group_by(category, fraud) %>% 
+summarise(n = n()) %>% 
+  
+# A barplot with reordered categories by frequency and fill by frequency
+ggplot(aes(x = reorder(as.factor(category), n), y = n)) +
+geom_bar(stat = "identity", aes(fill = n)) +
+coord_flip() +
+  geom_label(aes(label = formatC(n, format="f", big.mark=",", digits=0)), size = 3.2) +
+  scale_fill_gradient(low = colors60s[5], high = colors60s[1], guide = "none") +
+  theme(axis.text.x = element_blank()) +
+  labs(x = "Category", y = "Frequency", title = "Fraud Cases in Category Transaction")
+```
+
+From the above plot we can check that "sportsandtoys" and "health" categories have the most fraudulent cases for transactions.
+
+- Plot 3
+
+```{r, echo=FALSE}
+# predefined theme for the plot
+colors60s <- c("#BF4402", "#94058E", "#005DD7", "#2690C3", "#F5C402", "#CE378E")
+
+# set plot size
+options(repr.plot.width=18, repr.plot.height=7)
+    
+# Pipe the data through a series of operations
+data %>% 
+
+# Convert the category variable to a factor with specified levels
+  mutate(category = factor(category, levels = c("contents", "food", 
+  "transportation", "fashion", "barsandrestaurants","hyper", "wellnessandbeauty", 
+  "tech", "health", "home", "otherservices", "hotelservices", "sportsandtoys", 
+  "travel", "leisure"))) %>% 
+
+# Create the plot object
+ggplot(aes(x = category, fill = as.factor(fraud))) +
+geom_bar(stat = "count", position = "fill") +
+scale_y_continuous(labels = scales::percent) +coord_flip() +
+scale_fill_manual(values = colors60s[c(4, 6)]) +
+  
+# Set the axis and title labels
+labs(x = "Category", y = "Percentage", title = "Fraud Percentage for Categories", fill = "Fraud")
+```
+
+From the above plot we can say that the "leisure" and "travel" categories had the most highest percentage for a fraudulent transaction.
+
+- Decision Tree Model
+
+```{r, echo=FALSE, warning=FALSE}
+# Loading required libraries
+library(rpart)
+library(rpart.plot)
+
+# Train-Test Split (80:20 ratio)
+train_indices <- sample(1:nrow(data), nrow(data)*0.8) 
+train_data <- data[train_indices, ]
+test_data <- data[-train_indices, ]
+
+# Decision Tree model
+model <- rpart(fraud ~ category, data=train_data, method="class")
+
+# Make predictions on test data
+predictions <- predict(model, test_data, type="class")
+
+# Evaluate model performance
+confusion_matrix <- table(predictions, test_data$fraud)
+confusion_matrix
+accuracy <- sum(diag(confusion_matrix))/sum(confusion_matrix)
+precision <- confusion_matrix[2,2] / (confusion_matrix[2,2] 
+                                      + confusion_matrix[1,2])
+recall <- confusion_matrix[2,2] / (confusion_matrix[2,2] 
+                                   + confusion_matrix[2,1])
+
+# Print model performance metrics
+cat("Accuracy:", round(accuracy, 3), "\n")
+cat("Precision:", round(precision, 3), "\n")
+cat("Recall:", round(recall, 3), "\n")
+
+```
+
+Now, talking about the results, using a chi-square test of independence, it was determined whether the type of transaction had any impact on whether it was fraudulent or not. The alternative hypothesis suggested that there is a relationship between these factors, contrary to the null hypothesis that there isn't. The findings demonstrated a substantial and sizable connection between the two factors. From the results of the chi square test it was hence concluded that a substantial connection is there between type of category and fraud. Cramer's V (adj.) was calculated to be 0.56 in this investigation, with a 95% confidence interval of [0.54, 1.00]. It is usual practice to interpret the effect magnitude of Cramer's V using Cohen's d. It quantifies the standardized difference between two groups or circumstances using Cohen's d, a measure of effect magnitude. It can be used to quantify the strength of the relationship between categorical variables; a higher number denotes a stronger relationship.
+
+After this the data was grouped by category and filtered to only display fraudulent transactions in order to build a bar chart showing which transaction category had the most fraudulent transactions. A plot was also created showing us the total number transactions per category, in which it can be confirmed that "wellnessandbeauty" and "transportation" category had the highest number of transactions. The other plots also shows that the "sports, toys, and health" category had the highest percentage of fraud instances, while the "leisure" and "travel" categories had the lowest percentage. In particular the third plot shows us that all the transactions done in the "leisure" category were identified as fraudulent, while half of the transaction in "travel" category were identified as fraudulent.
+
+Post the analysis of the visual plots, a decision tree model was created further along with a confusion matrix to predict the fraudulent transaction in various categories. The confusion matrix shows us the results of the machine learning model like accuracy, precision. The confusion matrix shows the number of true negatives (0's predicted as 0's), false positives (0's predicted as 1's), false negatives (1's predicted as 0's), and true positives (1's predicted as 1's) in the "predictions" table. In our case, the model predicted 1967 true positives, 27 false positives, 0 false negatives, and 6 true negatives. Accuracy is the total number of correctly predicted values divided by total number of dataset values. In our case it was 0.9 approx, which means that the model has correctly predicted fraud in 90.0% or more cases. An approx precision value of (0.10) tells us about the quality of positive predictions. Recall value tells us about how well our model identifies true positives. In our case, the recall is shown as 0.8, which indicates that the model correctly predicted all the actual positive cases for fraud values in the test data.
+
+In conclusion, our analysis showed a substantial correlation between the type of transaction and whether it is fraudulent, with the "leisure" and "travel" categories having the highest percentage of fraudulent transactions while the "sports, toys, and health" category had the most fraud incidents. Also, based on the above results for our model it can be said that these findings support the notion that our model is highly accurate at properly predicting fraud situations, as evidenced by the high accuracy score. Yet because the model's precision is so low, there is a chance that it will produce more false positives and mistake some legitimate situations for fraud. The model appears to be able to accurately identify all genuine fraud cases, as indicated by the recall score of 1, but it is important to take the precision score into account as well in order to fully appreciate the model's performance. The results can be used to spot risky locations and put fraud prevention measures in place.
+
+# Discussion
+
+In recent years, the use of inferential statistical techniques such as the chi-square test and machine learning algorithms has shown promising outcomes in detecting and preventing fraudulent activities in financial payment networks. Governments, financial institutions, and the general public all have legitimate concerns regarding fraudulent activities in financial payment networks. Maintaining the security and integrity of financial systems necessitates the detection and prevention of fraud. As of late, inferential measurable procedures, for example, the chi-square and t-test have been broadly used to recognize deceitful exercises. These strategies consider the examination of examples and patterns in exchange information, assisting with pinpointing dubious way of behaving. Considering the same and as per our background research (**Jan et al. (2018)**), chi square test was first applied to check if any association was present between the fraud and type of category. From the chi-square test it was concluded that indeed there is a relation between fraud and type of transaction category. After this we also checked the effect size with the help of cramer's V test, which revealed that that there is a significant association between the categorical variables being examined in the contingency table.
+
+Machine learning algorithms have additionally demonstrated promising outcomes in the detection of fraud when compared to conventional statistical techniques. Machine learning methods that have been used on transaction data for fraud detection include decision trees, support vector machines, and artificial neural networks. With the use of these algorithms, fraudulent transactions can be detected more precisely and automatically by spotting complicated patterns and anomalies in vast databases.
+
+My tests and research revealed a substantial correlation between the type of transaction and its likelihood of being fraudulent. While performing the exploratory data analysis it was found that the "transportation" category had the most number of financial transactions followed by "wellnessandbeauty" category. The most fraud incidents occurred in the "sports, toys, and health" category, while the majority of transactions occurred in the "leisure" and "travel" categories were identified as fraudulent. These findings are consistent with previous research that found related categories to be highly susceptible to fraudulent transactions. The chi-square test of independence's findings, which revealed a significant effect size and a strong correlation between the two variables, further support these conclusions.
+
+In addition to inferential statistical methods and feature engineering techniques for detecting fraudulent activity in financial payment systems, data pre-processing processes have been implemented to improve the precision of fraud detection systems. These procedures involve data loading and pre-processing procedures such data cleansing, removing unnecessary columns, and grouping data. Also, as part of the data pre-processing stage, undesirable prefixes were eliminated. These steps hold a very important place in any analysis, as pre-processing activities helps us to transform the data for further analysis from which we can draw any kind of proper conclusion.
+In addition to the Chi-square test, a decision tree machine learning model was employed to predict fraudulent transactions among various transaction categories. The decision tree algorithm automatically generated a tree-like structure, with nodes representing decision points and branches representing different possible outcomes. The decision tree model was trained on the pre-processed transaction data, including features such as transaction category, amount, and other relevant variables. According to our background study (**Bhattacharyya et al. (2011)**, **Afriyie et al. (2023)** and **Rb et al. (2021)**). these pre-processing processes can enhance the effectiveness of fraud detection algorithms like decision tree by ensuring that the data used for analysis is reliable and pertinent.
+
+Overall, the results of the Chi-square test and the decision tree machine learning model provide compelling evidence of the association between transaction category and the likelihood of fraud. These results emphasise the significance of combining machine learning algorithms and inferential statistical techniques for efficient fraud detection in financial payment networks. The findings of this study add to the body of knowledge on fraud detection techniques that is expanding, and they may have significant repercussions for governments, financial institutions, and the general public in terms of reducing the risks brought on by fraudulent activities in financial payment systems. The results of this study can be strengthened and validated by more research, which can also examine the possibilities of other cutting-edge methods for detecting fraud in financial systems. Investigating fraud detection and prevention utilizing unsupervised learning techniques further, such as clustering and anomaly detection, can be helpful in future study. These strategies can assist financial institutions in putting in place targeted fraud prevention measures, such as more thorough monitoring and verification checks for transactions in high-risk categories.
+
+In conclusion, the results of my analysis offer useful information for financial institutions, governments, and anyone who want to stop and identify fraud in financial payment systems. Organizations can proactively identify and prevent fraudulent transactions as well as reduce the financial and reputational risks related to payment fraud by utilizing data analytics techniques, inferential statistical approaches, and machine learning algorithms. The application of unsupervised learning techniques may help fraud detection systems become more accurate and efficient. Overall, the analysis emphasizes how crucial it is to employ data-driven techniques for identifying and stopping fraudulent activity in financial payment systems.
+
+# References 
+
+- Rb, A., & Kr, S. K. (2021). Credit card fraud detection using artificial neural network. Global Transitions Proceedings, 2(1), 35–41. https://doi.org/10.1016/j.gltp.2021.01.006
+
+- Bhattacharyya, S., Jha, S. K., Tharakunnel, K. K., & Westland, J. C. (2011). Data mining for credit card fraud: A comparative study. Decision Support Systems, 50(3), 602–613. https://doi.org/10.1016/j.dss.2010.08.008
+
+- Afriyie, J. K., Tawiah, K., Pels, W. A., Addai-Henne, S., Dwamena, H. A., Owiredu, E. O., Ayeh, S. A., & Eshun, J. (2023). A supervised machine learning algorithm for detecting and predicting fraud in credit card transactions. Decision Analytics Journal, 6, 100163. https://doi.org/10.1016/j.dajour.2023.100163
+
+- Ma, M., Wang, L., & Fang, Y. (2015). An expert-validated credit card fraud detection model based on online auction transaction data. Decision Support Systems, 72, 23-34. 
+
+- Kultur, Y., & Caglayan, M. (2017). Hybrid approaches for detecting credit card fraud. Expert Systems, 34(2), e12191. https://doi.org/10.1111/exsy.12191
+
+- Hajek, P., Abedin, M. Z., & Sivarajah, U. (2022). Fraud Detection in Mobile Payment Systems using an XGBoost-based Framework. Information Systems Frontiers. https://doi.org/10.1007/s10796-022-10346-6
+
+- Jan, C. (2018). An Effective Financial Statements Fraud Detection Model for the Sustainable Development of Financial Markets: Evidence from Taiwan. Sustainability, 10(2), 513. https://doi.org/10.3390/su10020513
+
+- Wu, D. D., & Wu, W. (2014). Big data analytics. John Wiley & Sons.
+
+- Cherif, A., Badhib, A., Ammar, H., Alshehri, S., Kalkatawi, M., & Imine, A. (2022). Credit card fraud detection in the era of disruptive technologies: A systematic review. Journal of King Saud University - Computer and Information Sciences, 35(1), 145–174. https://doi.org/10.1016/j.jksuci.2022.11.008
+
+- Pourhabibi, T., Ong, K., Kam, B. H., & Boo, Y. L. (2020). Fraud detection: A systematic literature review of graph-based anomaly detection approaches. Decision Support Systems, 133, 113303. https://doi.org/10.1016/j.dss.2020.113303
+
+- Huang, Y., Zhu, Q., & Chen, Y. (2018). Fraud detection for mobile payment systems using big data analytics. Decision Support Systems, 108, 15-25.
+
+- Synthetic data from a financial payment system. (2017, July 11). Kaggle. https://www.kaggle.com/datasets/ealaxi/banksim1
+
+
+
+
+
+
+
